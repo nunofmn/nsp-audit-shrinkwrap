@@ -1,0 +1,41 @@
+{
+  "name": "nsp-audit-shrinkwrap",
+  "version": "0.0.0",
+  "description": "audits a shrinkwrap file or a stream of shrinkwraps agains the Node Security Project module vulnerability database",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/test-*.js",
+    "test-pretty": "node tests/test-*.js | node_modules/.bin/tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nodesecurity/nsp-audit-shrinkwrap.git"
+  },
+  "keywords": [
+    "shrinkwrap",
+    "npm",
+    "node",
+    "security",
+    "module",
+    "stream",
+    "audit",
+    "assess",
+    "validate"
+  ],
+  "author": "Node Security Project",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nodesecurity/nsp-audit-shrinkwrap/issues"
+  },
+  "homepage": "https://github.com/nodesecurity/nsp-audit-shrinkwrap",
+  "devDependencies": {
+    "jshint": "^2.5.5",
+    "precommit-hook": "^1.0.7",
+    "tap-spec": "^0.2.1",
+    "tape": "^2.14.0"
+  },
+  "dependencies": {
+    "duplex": "^1.0.0",
+    "nsp-api": "^1.0.0"
+  }
+}

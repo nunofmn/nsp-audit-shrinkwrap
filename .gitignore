@@ -1,1 +1,5 @@
 node_modules
+tests/projectBigNotVulnerable/node_modules
+tests/projectBigVulnerable/node_modules
+tests/projectSmallNotVulnerable/node_modules
+tests/projectSmallVulnerable/node_modules

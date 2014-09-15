@@ -1,6 +1,5 @@
 var test = require('tape');
 
-
 ///
 
 test('shrinkwrap with no vulnerabilties test', function (t) {

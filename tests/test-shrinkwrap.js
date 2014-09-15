@@ -1,20 +1,13 @@
 var test = require('tape');
 
+
 ///
 
 test('shrinkwrap with no vulnerabilties test', function (t) {
   t.end();
 });
 
-test('big shrinkwrap with no vulnerabilties test', function (t) {
-  t.end();
-});
-
 test('shrinkwrap with vulnerabilties test', function (t) {
-  t.end();
-});
-
-test('big shrinkwrap with vulnerabilties test', function (t) {
   t.end();
 });
 
@@ -25,15 +18,7 @@ test('shrinkwrap path with no vulnerabilties test test', function (t) {
   t.end();
 });
 
-test('big shrinkwrap path with no vulnerabilties test test', function (t) {
-  t.end();
-});
-
 test('shrinkwrap path with vulnerabilties test test', function (t) {
-  t.end();
-});
-
-test('big shrinkwrap path with vulnerabilties test test', function (t) {
   t.end();
 });
 
@@ -44,17 +29,16 @@ test('shrinkwrap stream test', function (t) {
   t.end();  
 });
 
-test('big shrinkwrap stream test', function (t) {
-  t.end();
-});
 
-  // t.plan(2);
+// t.plan(2);
 
-  // t.equal(typeof Date.now, 'function');
-  // var start = Date.now();
+// t.equal(typeof Date.now, 'function');
+// var start = Date.now();
 
-  // setTimeout(function () {
-  //     t.equal(Date.now() - start, 100);
-  // }, 100);
+// t.end()
 
-  // t.end()
+
+
+// vulnerabilties picked:
+// https://nodesecurity.io/advisories/qs_dos_extended_event_loop_blocking
+// https://nodesecurity.io/advisories/crumb_cors_token_disclosure

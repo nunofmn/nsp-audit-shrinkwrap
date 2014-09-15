@@ -38,7 +38,8 @@ test('shrinkwrap stream test', function (t) {
 // t.end()
 
 
-
 // vulnerabilties picked:
-// https://nodesecurity.io/advisories/qs_dos_extended_event_loop_blocking
-// https://nodesecurity.io/advisories/crumb_cors_token_disclosure
+// qs       https://nodesecurity.io/advisories/qs_dos_extended_event_loop_blocking
+// crumb    https://nodesecurity.io/advisories/crumb_cors_token_disclosure
+// connect  https://nodesecurity.io/advisories/methodOverride_Middleware_Reflected_Cross-Site_Scripting
+// send     https://nodesecurity.io/advisories/send-directory-traversal

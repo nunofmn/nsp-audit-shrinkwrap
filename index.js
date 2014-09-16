@@ -8,13 +8,6 @@ var audit = exports.audit = function (_shrinkwrap, cb) {
   var shrinkwrap = JSON.parse(_shrinkwrap);
 
   validateShrinkwrap(shrinkwrap, cb);
-
-  // validateShrinkwrap(shrinkwrap, function (err, result) {
-  //   if (err) { 
-  //     return cb(err, null); 
-  //   }
-  //   cb(null, result);
-  // });
 };
 
 exports.auditByPath = function (shrinkwrapPath, cb) {
@@ -33,12 +26,12 @@ exports.auditStream = function () {
 
   shrinkwrapStream.on('_data', function (data) {
     audit(data, function (err, result) {
-      resultStream.sendData(result);
+      resultStream.write(result);
     });
   });
 
   shrinkwrapStream.on('_end', function () {
-    resultStream.sendEnd();
+    resultStream.end();
   });
 
   return {

@@ -1,10 +1,22 @@
 var test = require('tape');
+var nsp_shrinkwrap = require('./../index.js');
+var path = require('path');
+var fs   = require('fs');
 
+// var pVulPath    = path.resolve(process.cwd() + '/tests/projectVulnerable') + '/npm-shrinkwrap.json';
+// var pVul        = fs.readFileSync(pVulPath);
+
+var pNotVulPath = path.resolve(process.cwd() + '/tests/projectNotVulnerable') + '/npm-shrinkwrap.json';
+var pNotVul     = fs.readFileSync(pNotVulPath);
 
 ///
 
 test('shrinkwrap with no vulnerabilties test', function (t) {
-  t.end();
+  nsp_shrinkwrap.audit(pNotVul, function (err, results){
+    t.error(err, 'Should not return a error');
+    t.same(results, [],  'Should not contain any vulnerabilities');
+    t.end();
+  });
 });
 
 test('shrinkwrap with vulnerabilties test', function (t) {
@@ -15,7 +27,11 @@ test('shrinkwrap with vulnerabilties test', function (t) {
 ///
 
 test('shrinkwrap path with no vulnerabilties test test', function (t) {
-  t.end();
+  nsp_shrinkwrap.auditByPath(pNotVulPath, function (err, results){
+    t.error(err, 'Should not return a error');
+    t.same(results, [],  'Should not contain any vulnerabilities');
+    t.end();
+  });
 });
 
 test('shrinkwrap path with vulnerabilties test test', function (t) {

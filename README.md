@@ -13,11 +13,11 @@ var shrinkwrapFile = fs.readFileSync(shrinkwrapPath);
 
 
 nspShrinkwrap.audit(shrinkwrapFile, function (err, results){
-  console.log(results);
+    console.log(results);
 };
 
 nspShrinkwrap.auditByPath(shrinkwrapPath, function (err, results){
-  console.log(results);
+    console.log(results);
 };
 ```
 
@@ -32,14 +32,14 @@ auditStream.shrinkwrap.write(shrinkwrap2);
 //... how many shrinkwraps you want
 
 setTimeout(function(){
-  auditStream.shrinkwrap.end(); // you close the stream whenever you want :)
+    auditStream.shrinkwrap.end(); // you close the stream whenever you want :)
 }, 3000);
 
 auditStream.results.on('_data', function (data){
-  results.push(data);
+    results.push(data);
 });
 
 auditStream.results.on('_end', function (){
-  console.log(results);
+    console.log(results);
 });
 ```

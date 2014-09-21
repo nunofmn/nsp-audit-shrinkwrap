@@ -1,7 +1,7 @@
 nsp-audit-shrinkwrap
 ============
 
-`nsp-audit-shrinkwrap` offers a simple lib to audit your shrinkwrap or a stream or shrinkwraps
+`nsp-audit-shrinkwrap` offers a simple library to audit your shrinkwrap or a stream of shrinkwraps.
 
 
 ## One npm-shrinkwrap.json
@@ -24,7 +24,7 @@ nspShrinkwrap.auditByPath(shrinkwrapPath, function (err, results){
 ## Stream of npm-shrinkwrap.json
 
 ```javascript
-var auditStream = nsp_shrinkwrap.auditStream();
+var auditStream = nspShrinkwrap.auditStream();
 var results = [];
 
 auditStream.shrinkwrap.write(shrinkwrap1);
@@ -33,7 +33,7 @@ auditStream.shrinkwrap.write(shrinkwrap2);
 
 setTimeout(function(){
   auditStream.shrinkwrap.end(); // you close the stream whenever you want :)
-}, 3000); 
+}, 3000);
 
 auditStream.results.on('_data', function (data){
   results.push(data);
@@ -42,4 +42,4 @@ auditStream.results.on('_data', function (data){
 auditStream.results.on('_end', function (){
   console.log(results);
 });
-```  
+```

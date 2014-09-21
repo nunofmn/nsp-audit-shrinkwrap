@@ -1,6 +1,6 @@
 {
   "name": "nsp-audit-shrinkwrap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "audits a shrinkwrap file or a stream of shrinkwraps agains the Node Security Project module vulnerability database",
   "main": "index.js",
   "scripts": {

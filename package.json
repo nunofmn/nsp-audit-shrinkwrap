@@ -6,7 +6,9 @@
   "scripts": {
     "codestyle": "./node_modules/.bin/jscs src/index.js tests/*.js",
     "lint": "./node_modules/.bin/jshint .",
-    "test": "node tests/test-*.js | node_modules/.bin/tap-spec"
+     "test": "node ./node_modules/.bin/lab -r tap tests/*-test.js | ./node_modules/.bin/tap-spec",
+     "test-cov": "node ./node_modules/.bin/lab -t 100 tests/*-test.js",
+     "test-cov-html": "node ./node_modules/.bin/lab -r html -o coverage.html tests/*-test.js"
   },
   "precommit": [
     "codestyle",
@@ -35,11 +37,12 @@
   },
   "homepage": "https://github.com/nodesecurity/nsp-audit-shrinkwrap",
   "devDependencies": {
+    "code": "^1.3.0",
     "jscs": "^1.10.0",
-    "jshint": "^2.5.11",
+    "jshint": "^2.6.0",
+    "lab": "^5.2.1",
     "precommit-hook": "^1.0.7",
-    "tap-spec": "^0.2.1",
-    "tape": "^2.14.0"
+    "tap-spec": "^2.2.0",
   },
   "dependencies": {
     "duplex": "^1.0.0",

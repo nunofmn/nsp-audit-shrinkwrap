@@ -1,67 +1,111 @@
-var test = require('tape');
+var Lab = require('lab');
+var Code = require('code');
+var lab = exports.lab = Lab.script();
+
+var experiment = lab.experiment;
+var test = lab.test;
+var before = lab.before;
+var after = lab.after;
+var expect = Code.expect;
+
 var nspShrinkwrap = require('./../src/index.js');
 var path = require('path');
 var fs = require('fs');
 
-var pVulPath = path.resolve(process.cwd() +
-        '/tests/projectVulnerable') + '/npm-shrinkwrap.json';
+var pVulPath = path.resolve(process.cwd() + '/tests/projectVulnerable') +
+    '/npm-shrinkwrap.json';
 var pVul = fs.readFileSync(pVulPath);
 
-var pNotVulPath = path.resolve(process.cwd() +
-        '/tests/projectNotVulnerable') + '/npm-shrinkwrap.json';
+var pNotVulPath = path.resolve(process.cwd() + '/tests/projectNotVulnerable') +
+    '/npm-shrinkwrap.json';
 var pNotVul = fs.readFileSync(pNotVulPath);
 
-test('shrinkwrap with no vulnerabilties test', function(t) {
-    nspShrinkwrap.audit(pNotVul, function(err, results) {
-        t.error(err, 'Should not return a error');
-        t.same(results, [], 'Should not contain any vulnerabilities');
-        t.end();
+experiment('shrinkwrap with no vulnerabilities', function() {
+
+    before(function(done) {
+        done();
     });
+
+    after(function(done) {
+        done();
+    });
+
+    test('no vulnerabilities test', function(done) {
+        nspShrinkwrap.audit(pNotVul, function(err, results) {
+            expect(err).to.be.null();
+            expect(results).to.deep.equal([]);
+            done();
+        });
+    });
+
+    test('no vulnerabilities by path test', function(done) {
+        nspShrinkwrap.auditByPath(pNotVulPath, function(err, results) {
+            expect(err).to.be.null();
+            expect(results).to.deep.equal([]);
+            done();
+        });
+    });
+
 });
 
-test('shrinkwrap with vulnerabilties test', function(t) {
-    nspShrinkwrap.audit(pVul, function(err, results) {
-        t.error(err, 'Should not return a error');
-        t.equal(results.length, 5, 'Should return 5 vulnerabilties');
-        t.end();
+experiment('shrinkwrap with vulnerabilities', function() {
+
+    before(function(done) {
+        done();
     });
+
+    after(function(done) {
+        done();
+    });
+
+    test('vulnerabilities test', function(done) {
+        nspShrinkwrap.audit(pVul, function(err, results) {
+            expect(err).to.be.null();
+            expect(results.length).to.equal(5);
+            done();
+        });
+    });
+
+    test('vulnerabilities by path test', function(done) {
+        nspShrinkwrap.auditByPath(pVulPath, function(err, results) {
+            expect(err).to.be.null();
+            expect(results.length).to.equal(5);
+            done();
+        });
+    });
+
 });
 
-test('shrinkwrap path with no vulnerabilties test test', function(t) {
-    nspShrinkwrap.auditByPath(pNotVulPath, function(err, results) {
-        t.error(err, 'Should not return a error');
-        t.same(results, [], 'Should not contain any vulnerabilities');
-        t.end();
-    });
-});
+experiment('shrinkwrap stream', function() {
 
-test('shrinkwrap path with vulnerabilties test test', function(t) {
-    nspShrinkwrap.auditByPath(pVulPath, function(err, results) {
-        t.error(err, 'Should not return a error');
-        t.equal(results.length, 5, 'Should return 5 vulnerabilties');
-        t.end();
-    });
-});
-
-test('shrinkwrap stream test', function(t) {
-    var auditStream = nspShrinkwrap.auditStream();
-    var results = [];
-    auditStream.shrinkwrap.write(pNotVul);
-    auditStream.shrinkwrap.write(pVul);
-
-    setTimeout(function() {
-        auditStream.shrinkwrap.end();
-    }, 5000); // value depends on how responsive is the API
-
-    auditStream.results.on('_data', function(data) {
-        results.push(data);
+    before(function(done) {
+        done();
     });
 
-    auditStream.results.on('_end', function() {
-        t.equal(results.length, 2, 'Should have two results, ' +
-            'one for each shrinkwrap');
-        t.equal(results[0].length + results[1].length, 5, 'Sum of' +
-            ' shrinkwrap vulns should be 5');
-        t.end();
+    after(function(done) {
+        done();
     });
+
+    test('stream test', function(done) {
+        var auditStream = nspShrinkwrap.auditStream();
+        var results = [];
+        auditStream.shrinkwrap.write(pNotVul);
+        auditStream.shrinkwrap.write(pVul);
+
+        setTimeout(function() {
+            auditStream.shrinkwrap.end();
+        }, 5000); // value depends on how responsive is the API
+
+        auditStream.results.on('_data', function(data) {
+            results.push(data);
+        });
+
+        auditStream.results.on('_end', function() {
+            expect(results.length).to.equal(2);
+            expect(results[0].length + results[1].length).to.equal(5);
+            done();
+        });
+
+    });
+
 });

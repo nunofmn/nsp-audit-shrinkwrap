@@ -46,6 +46,13 @@ experiment('shrinkwrap with no vulnerabilities', function() {
         });
     });
 
+    test('no vulnerabilities bad path test', function(done) {
+        nspShrinkwrap.auditByPath('awesome/path.json', function(err, results) {
+            expect(err).to.exist();
+            done();
+        });
+    });
+
 });
 
 experiment('shrinkwrap with vulnerabilities', function() {
